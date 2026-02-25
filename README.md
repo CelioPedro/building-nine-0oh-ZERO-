@@ -1,16 +1,170 @@
-# React + Vite
+# NINE-0 🏙️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Currently, two official plugins are available:
+Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em streetwear brasileiro autêntico. Construída com React e Vite, oferecendo uma experiência de compra fluida com animações suaves e design responsivo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Sumário
 
-## React Compiler
+- [🚀 Demonstração](#-demonstração)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologias](#️-tecnologias)
+- [📦 Instalação](#-instalação)
+- [🏃‍♂️ Como Usar](#️-como-usar)
+- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
+- [🤝 Contribuição](#-contribuição)
+- [📄 Licença](#-licença)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Demonstração
 
-## Expanding the ESLint configuration
+### Página Inicial
+![Página Inicial](screenshots/home.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Loja
+![Página da Loja](screenshots/shop.png)
+
+### Detalhes do Produto
+![Detalhes do Produto](screenshots/product-detail.png)
+
+> **Nota:** Adicione as imagens de screenshot na pasta `screenshots/` para visualizar as demonstrações.
+
+## ✨ Funcionalidades
+
+- 🛒 **Carrinho de Compras** - Adicione, remova e gerencie itens no carrinho
+- 🔍 **Busca e Filtros** - Encontre produtos por categoria, nome ou preço
+- 📱 **Design Responsivo** - Experiência otimizada para desktop e mobile
+- 🎨 **Animações Suaves** - Animações GSAP para interações fluidas
+- 🖼️ **Galeria de Produtos** - Visualização detalhada com múltiplas imagens
+- 📖 **Lookbook** - Apresentação visual da coleção
+- ℹ️ **Sobre a Marca** - História e valores da NINE-0
+- 📞 **Contato** - Formulário de contato integrado
+
+## 🛠️ Tecnologias
+
+### Frontend
+- **React 19** - Biblioteca JavaScript para interfaces
+- **Vite** - Build tool e dev server rápido
+- **React Router DOM** - Roteamento para SPA
+- **GSAP** - Animações de alto desempenho
+- **Swiper** - Carrosséis touch-friendly
+- **Lucide React** - Ícones modernos
+
+### Desenvolvimento
+- **ESLint** - Linting e formatação de código
+- **Vite Plugin React** - Integração React com Vite
+
+## 📦 Instalação
+
+### Pré-requisitos
+- Node.js 18+
+- npm ou yarn
+
+### Passos
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/nine-0.git
+   cd nine-0
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
+
+4. **Abra no navegador**
+   ```
+   http://localhost:5173
+   ```
+
+## 🏃‍♂️ Como Usar
+
+### Desenvolvimento
+```bash
+# Iniciar servidor de desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Preview do build
+npm run preview
+
+# Linting
+npm run lint
+```
+
+### Navegação
+- **/** - Página inicial com destaques
+- **/shop** - Loja com todos os produtos
+- **/product/:id** - Detalhes do produto específico
+- **/about** - Sobre a marca
+- **/lookbook** - Galeria visual
+- **/contact** - Página de contato
+
+## 📁 Estrutura do Projeto
+
+```
+nine-0/
+├── public/
+│   ├── logo.png
+│   ├── camisetas/
+│   ├── Hoodies/
+│   ├── calças/
+│   ├── Acessórios/
+│   └── Jaquetas/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── CartDrawer.jsx
+│   │   ├── Footer.jsx
+│   │   └── ...
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Shop.jsx
+│   │   ├── ProductDetail.jsx
+│   │   └── ...
+│   ├── context/
+│   │   └── CartContext.jsx
+│   ├── data/
+│   │   └── products.js
+│   ├── assets/
+│   ├── App.jsx
+│   └── main.jsx
+├── package.json
+├── vite.config.js
+├── eslint.config.js
+└── README.md
+```
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Siga estes passos:
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+### Diretrizes
+- Mantenha o código limpo e bem documentado
+- Siga as convenções de nomenclatura existentes
+- Teste suas mudanças antes de submeter
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+**NINE-0** - Streetwear brasileiro autêntico. Feito para quem vive a cultura urbana. 🏙️
