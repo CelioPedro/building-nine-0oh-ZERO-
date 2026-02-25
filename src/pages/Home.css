@@ -119,14 +119,14 @@
 }
 
 .hero__corner--bl {
-    bottom: 20%;
+    bottom: 10%;
     left: 8%;
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
     border-left: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .hero__corner--br {
-    bottom: 20%;
+    bottom: 10%;
     right: 8%;
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
     border-right: 2px solid rgba(255, 255, 255, 0.15);

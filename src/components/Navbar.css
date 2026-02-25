@@ -24,13 +24,14 @@
 
 /* Logo */
 .navbar__logo {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 900;
-    letter-spacing: -0.03em;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     z-index: 1001;
+}
+
+.navbar__logo-image {
+    height: 130px;
+    width: auto;
 }
 
 .navbar__logo-text {

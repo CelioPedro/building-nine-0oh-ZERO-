@@ -88,7 +88,11 @@ export default function ProductDetail() {
                                     background: `linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)`,
                                 }}
                             >
-                                <span className="product-detail__image-brand">NINE-0</span>
+                                {product.images && product.images.length > 0 ? (
+                                    <img src={product.images[0]} alt={product.name} className="product-detail__img" />
+                                ) : (
+                                    <span className="product-detail__image-brand">NINE-0</span>
+                                )}
                                 {product.badge && (
                                     <span className="product-detail__badge">{product.badge}</span>
                                 )}
