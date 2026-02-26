@@ -424,7 +424,17 @@
     position: absolute;
     inset: 0;
     background: var(--gradient-card);
-    transition: all var(--transition-base);
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    transition: filter var(--transition-base);
+}
+
+.categories__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 1) 100%);
+    z-index: 0;
 }
 
 .categories__card:hover {
@@ -433,7 +443,7 @@
 }
 
 .categories__card:hover .categories__card-bg {
-    background: linear-gradient(145deg, rgba(168, 85, 247, 0.1) 0%, #0a0a0a 100%);
+    filter: none;
 }
 
 .categories__card-content {

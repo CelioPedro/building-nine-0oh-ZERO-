@@ -295,19 +295,19 @@ export default function Home() {
                     <h2 className="categories__title">Categorias</h2>
                     <div className="categories__grid">
                         {[
-                            { name: 'Hoodies', slug: 'hoodies', desc: 'Conforto oversized', icon: '◈' },
-                            { name: 'Camisetas', slug: 'camisetas', desc: 'Estampas exclusivas', icon: '◉' },
-                            { name: 'Calças', slug: 'calças', desc: 'Cargo & Wide Leg', icon: '◆' },
-                            { name: 'Acessórios', slug: 'acessórios', desc: 'Complete o look', icon: '◇' },
+                            { name: 'Hoodies', slug: 'hoodies', desc: 'Conforto oversized', icon: '◈', image: '/categoriashome/hoodie.jpg' },
+                            { name: 'Camisetas', slug: 'camisetas', desc: 'Estampas exclusivas', icon: '◉', image: '/categoriashome/camiseta.jpg' },
+                            { name: 'Calças', slug: 'calças', desc: 'Cargo & Wide Leg', icon: '◆', image: '/categoriashome/calça.jpg' },
+                            { name: 'Acessórios', slug: 'acessórios', desc: 'Complete o look', icon: '◇', image: '/categoriashome/Acessório.jpg' },
                         ].map((cat) => (
                             <Link
                                 key={cat.slug}
                                 to={`/shop?category=${cat.slug}`}
                                 className="categories__card"
                             >
-                                <div className="categories__card-bg" />
+                                <div className="categories__card-bg" style={{ backgroundImage: `url(${cat.image})` }} />
+                                <div className="categories__card-overlay" />
                                 <div className="categories__card-content">
-                                    <span className="categories__card-icon">{cat.icon}</span>
                                     <h3 className="categories__card-name">{cat.name}</h3>
                                     <p className="categories__card-desc">{cat.desc}</p>
                                     <ArrowRight size={20} className="categories__card-arrow" />
