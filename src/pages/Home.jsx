@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import WireframeGlobe from '../components/WireframeGlobe';
+import HeroSlider from '../components/HeroSlider';
+import BrandVisual3D from '../components/BrandVisual3D';
 import './Home.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,167 +17,196 @@ export default function Home() {
     const featuredRef = useRef(null);
     const aboutRef = useRef(null);
     const categoriesRef = useRef(null);
+    const statementRef = useRef(null);
+    const marqueeRef = useRef(null);
+    const marqueeTrack1 = useRef(null);
+    const lookbookRef = useRef(null);
+    const lookbookTrackRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Featured products stagger animation
+            // ── GSAP-powered Marquee (direction responsive) ──
+            const track1 = marqueeTrack1.current;
+            if (track1) {
+                const marqueeAnim1 = gsap.to(track1, {
+                    xPercent: -50, duration: 25, ease: 'none', repeat: -1,
+                });
+
+                ScrollTrigger.create({
+                    trigger: marqueeRef.current,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    onUpdate: (self) => {
+                        const v = self.direction === 1 ? 1 : -1;
+                        gsap.to(marqueeAnim1, { timeScale: v * 1.5, duration: 0.3 });
+                    },
+                });
+            }
+
+            // ── Statement section scroll-scrubbed text reveal ──
+            const statementWords = statementRef.current?.querySelectorAll('.statement__word');
+            if (statementWords?.length) {
+                gsap.fromTo(statementWords,
+                    { opacity: 0.1 },
+                    {
+                        opacity: 1,
+                        stagger: 0.1,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: statementRef.current,
+                            start: 'top 70%',
+                            end: 'center 40%',
+                            scrub: 1,
+                        },
+                    }
+                );
+            }
+
+            // ── Featured section enhanced animations ──
+            gsap.fromTo('.featured__header > div',
+                { x: -60, opacity: 0 },
+                {
+                    x: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: { trigger: featuredRef.current, start: 'top 65%', toggleActions: 'play none none none' },
+                }
+            );
+            gsap.fromTo('.featured__header > a',
+                { x: 60, opacity: 0 },
+                {
+                    x: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: { trigger: featuredRef.current, start: 'top 65%', toggleActions: 'play none none none' },
+                }
+            );
             gsap.fromTo('.featured__grid .product-card',
-                { y: 60, opacity: 0 },
+                { y: 80, opacity: 0, scale: 0.9, rotation: 2 },
                 {
-                    scrollTrigger: {
-                        trigger: featuredRef.current,
-                        start: 'top 60%',
-                        toggleActions: 'play none none none',
-                    },
-                    y: 0,
-                    opacity: 1,
-                    duration: 1.3,
-                    stagger: 0.25,
-                    ease: 'power3.out',
+                    y: 0, opacity: 1, scale: 1, rotation: 0,
+                    duration: 1.3, stagger: 0.2, ease: 'power3.out',
+                    scrollTrigger: { trigger: featuredRef.current, start: 'top 55%', toggleActions: 'play none none none' },
                 }
             );
 
-            // About banner reveal
+            // ── About banner with clip-path reveal ──
             gsap.fromTo('.about-banner__content',
-                { x: -50, opacity: 0 },
+                { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
                 {
-                    scrollTrigger: {
-                        trigger: aboutRef.current,
-                        start: 'top 60%',
-                        toggleActions: 'play none none none',
-                    },
-                    x: 0,
-                    opacity: 1,
-                    duration: 1.4,
-                    ease: 'power3.out',
+                    clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 1.5, ease: 'power3.inOut',
+                    scrollTrigger: { trigger: aboutRef.current, start: 'top 60%', toggleActions: 'play none none none' },
                 }
             );
-
             gsap.fromTo('.about-banner__visual',
-                { x: 50, opacity: 0 },
+                { x: 80, opacity: 0, scale: 0.8 },
                 {
-                    scrollTrigger: {
-                        trigger: aboutRef.current,
-                        start: 'top 60%',
-                        toggleActions: 'play none none none',
-                    },
-                    x: 0,
-                    opacity: 1,
-                    duration: 1.4,
-                    delay: 0.4,
-                    ease: 'power3.out',
+                    x: 0, opacity: 1, scale: 1, duration: 1.4, delay: 0.3, ease: 'power3.out',
+                    scrollTrigger: { trigger: aboutRef.current, start: 'top 60%', toggleActions: 'play none none none' },
                 }
             );
 
-            // Categories stagger
-            gsap.fromTo('.categories__card',
+            // ── Categories — alternating sides ──
+            const catCards = categoriesRef.current?.querySelectorAll('.categories__card');
+            if (catCards) {
+                catCards.forEach((card, i) => {
+                    const fromX = i % 2 === 0 ? -80 : 80;
+                    gsap.fromTo(card,
+                        { x: fromX, opacity: 0, rotation: i % 2 === 0 ? -5 : 5 },
+                        {
+                            x: 0, opacity: 1, rotation: 0,
+                            duration: 1.2, ease: 'power3.out',
+                            scrollTrigger: {
+                                trigger: categoriesRef.current,
+                                start: `top ${65 - i * 3}%`,
+                                toggleActions: 'play none none none',
+                            },
+                            delay: i * 0.15,
+                        }
+                    );
+                });
+            }
+
+            gsap.fromTo('.categories__title',
                 { y: 40, opacity: 0 },
                 {
-                    scrollTrigger: {
-                        trigger: categoriesRef.current,
-                        start: 'top 60%',
-                        toggleActions: 'play none none none',
-                    },
-                    y: 0,
-                    opacity: 1,
-                    duration: 1.2,
-                    stagger: 0.2,
-                    ease: 'power3.out',
+                    y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                    scrollTrigger: { trigger: categoriesRef.current, start: 'top 70%', toggleActions: 'play none none none' },
                 }
             );
 
-            // Featured header
-            gsap.fromTo('.featured__header',
-                { y: 30, opacity: 0 },
-                {
-                    scrollTrigger: {
-                        trigger: featuredRef.current,
-                        start: 'top 65%',
-                        toggleActions: 'play none none none',
-                    },
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power3.out',
-                }
-            );
+            // ── Horizontal scroll lookbook ──
+            const lookbookTrack = lookbookTrackRef.current;
+            const lookbookWrapper = lookbookRef.current;
 
-            // Categories title
-            gsap.fromTo('.categories__title',
-                { y: 30, opacity: 0 },
-                {
-                    scrollTrigger: {
-                        trigger: categoriesRef.current,
-                        start: 'top 65%',
-                        toggleActions: 'play none none none',
-                    },
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: 'power3.out',
+            if (lookbookTrack && lookbookWrapper) {
+                // Get Sections inside track
+                const sections = gsap.utils.toArray('.lookbook-scroll__card', lookbookTrack);
+                const intro = lookbookTrack.querySelector('.lookbook-scroll__intro');
+
+                // Create a timeline for synchronized animations
+                const tl = gsap.timeline();
+
+                // 1. Gently fade out and translate the intro to the left
+                if (intro) {
+                    tl.to(intro, {
+                        opacity: 0,
+                        x: -80,
+                        duration: 1, // Shorter duration to fade early in the scroll
+                        ease: "power2.inOut"
+                    }, 0);
                 }
-            );
+
+                // 2. Animate the cards moving horizontally
+                tl.to(sections, {
+                    xPercent: -100 * (sections.length - 1),
+                    duration: sections.length, // Longer duration equivalent to the whole scroll
+                    ease: "none"
+                }, 0); // Start at the same time
+
+                // Let CSS handle the sticky pinning natively. 
+                // GSAP just maps the scroll progress to the x translation.
+                ScrollTrigger.create({
+                    trigger: lookbookWrapper,
+                    start: "top top",
+                    end: "bottom bottom",
+                    animation: tl,
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                });
+            }
         });
 
         return () => ctx.revert();
     }, []);
 
+    // Statement text split into words
+    const statementText = "BORN IN THE STREETS. MADE FOR THE WORLD.";
+
     return (
         <main className="home">
-            {/* ── Hero ── */}
-            <section className="hero">
-                <div className="hero__bg">
-                    <WireframeGlobe size={600} className="hero__globe" />
-                    <div className="hero__grain" />
-                </div>
+            {/* ── Hero Slider ── */}
+            <HeroSlider />
 
-                <div className="hero__content container">
-                    <div className="hero__badge badge">Nova Coleção 2026</div>
-
-                    <h1 className="hero__title">
-                        <span className="hero__title-line">STREET</span>
-                        <span className="hero__title-line hero__title-line--accent">WEAR</span>
-                    </h1>
-
-                    <p className="hero__subtitle">
-                        Moda urbana independente. Cada peça conta uma história.
-                        Feito para quem vive a cultura de rua.
-                    </p>
-
-                    <div className="hero__cta">
-                        <Link to="/shop" className="btn btn-primary btn-lg">
-                            Explorar Coleção <ArrowRight size={18} />
-                        </Link>
-                        <Link to="/lookbook" className="btn btn-outline btn-lg">
-                            Lookbook
-                        </Link>
-                    </div>
-
-                    <div className="hero__scroll">
-                        <ArrowDown size={20} />
-                        <span>Scroll</span>
-                    </div>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="hero__corner hero__corner--tl" />
-                <div className="hero__corner hero__corner--tr" />
-                <div className="hero__corner hero__corner--bl" />
-                <div className="hero__corner hero__corner--br" />
-
-                <div className="hero__graffiti">九零</div>
-            </section>
-
-            {/* ── Marquee ── */}
-            <section className="marquee-section">
+            {/* ── Marquee (GSAP-powered, dual track) ── */}
+            <section className="marquee-section" ref={marqueeRef}>
                 <div className="marquee">
-                    <div className="marquee__track">
-                        {Array(8).fill(null).map((_, i) => (
+                    <div className="marquee__track" ref={marqueeTrack1}>
+                        {Array(10).fill(null).map((_, i) => (
                             <span key={i} className="marquee__item">
                                 NINE-0 <span className="marquee__dot">◆</span> STREETWEAR <span className="marquee__dot">◆</span> CULTURA URBANA <span className="marquee__dot">◆</span>
                             </span>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* ── Statement Section ── */}
+            <section className="statement section" ref={statementRef}>
+                <div className="statement__bg">
+                </div>
+                <div className="container">
+                    <h2 className="statement__text">
+                        {statementText.split(' ').map((word, i) => (
+                            <span key={i} className="statement__word">{word} </span>
+                        ))}
+                    </h2>
                 </div>
             </section>
 
@@ -224,8 +255,36 @@ export default function Home() {
                         </div>
 
                         <div className="about-banner__visual">
-                            <WireframeGlobe size={350} />
+                            <BrandVisual3D />
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Horizontal Scroll Lookbook ── */}
+            <section className="lookbook-wrapper" ref={lookbookRef}>
+                <div className="lookbook-scroll">
+                    <div className="lookbook-scroll__track" ref={lookbookTrackRef}>
+                        <div className="lookbook-scroll__intro">
+                            <span className="uppercase text-accent" style={{ fontSize: 'var(--text-sm)', fontWeight: 600, letterSpacing: '0.15em' }}>
+                                Lookbook
+                            </span>
+                            <h2 className="lookbook-scroll__title">Veja em Ação</h2>
+                        </div>
+                        {[
+                            { image: '/lookbook/2xko.jpg', label: 'Concrete Dreams' },
+                            { image: '/lookbook/baaag.jpg', label: 'Neon District' },
+                            { image: '/lookbook/gorro.jpg', label: 'Night Protocol' },
+                            { image: '/camisetas/Void.jpg', label: 'Urban Shadows' },
+                            { image: '/Jaquetas/1993.jpg', label: 'Void Sequence' },
+                        ].map((item, i) => (
+                            <div key={i} className="lookbook-scroll__card">
+                                <div className="lookbook-scroll__card-img" style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#111' }}>
+                                    <span className="lookbook-scroll__card-num">{String(i + 1).padStart(2, '0')}</span>
+                                </div>
+                                <span className="lookbook-scroll__card-label">{item.label}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

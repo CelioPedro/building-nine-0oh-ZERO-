@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════
-   ABOUT PAGE
+   ABOUT PAGE — Enhanced
    ══════════════════════════════════════════ */
 
 .about__hero {
@@ -39,6 +39,14 @@
     pointer-events: none;
 }
 
+.about__hero-skull {
+    position: absolute;
+    right: 15%;
+    bottom: 10%;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
 /* Section Title */
 .about__section-title {
     font-size: var(--text-3xl);
@@ -54,6 +62,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-xl);
+    perspective: 1000px;
 }
 
 .about__value-card {
@@ -61,11 +70,14 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .about__value-card:hover {
     border-color: var(--color-accent);
-    transform: translateY(-4px);
+    transform: translateY(-4px) rotateY(2deg);
+    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.15);
 }
 
 .about__value-number {
@@ -100,14 +112,14 @@
     padding-left: var(--space-4xl);
 }
 
-.about__timeline-list::before {
-    content: '';
+.about__timeline-line {
     position: absolute;
     left: 7px;
     top: 0;
     bottom: 0;
     width: 1px;
-    background: var(--color-border-light);
+    background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-border-light) 100%);
+    transform-origin: top center;
 }
 
 .about__timeline-item {
@@ -116,6 +128,7 @@
     display: flex;
     align-items: flex-start;
     gap: var(--space-xl);
+    will-change: transform;
 }
 
 .about__timeline-item:last-child {
@@ -131,6 +144,7 @@
     border-radius: var(--radius-full);
     background: var(--color-accent);
     border: 2px solid var(--color-bg);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
 }
 
 .about__timeline-year {
@@ -163,7 +177,7 @@
 .about__stat-number {
     display: block;
     font-family: var(--font-display);
-    font-size: var(--text-4xl);
+    font-size: var(--text-5xl);
     font-weight: 900;
     background: var(--gradient-accent);
     -webkit-background-clip: text;
@@ -186,6 +200,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: var(--gradient-card);
+    will-change: transform;
 }
 
 .about__cta-title {
@@ -206,12 +221,17 @@
         font-size: var(--text-4xl);
     }
 
-    .about__hero-globe {
+    .about__hero-globe,
+    .about__hero-skull {
         display: none;
     }
 
     .about__values-grid,
     .about__stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .about__stat-number {
+        font-size: var(--text-4xl);
     }
 }

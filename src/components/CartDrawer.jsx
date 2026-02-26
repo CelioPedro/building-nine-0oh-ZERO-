@@ -41,10 +41,11 @@ export default function CartDrawer() {
                                 <div
                                     className="cart-item__image"
                                     style={{
-                                        background: `linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)`,
+                                        backgroundImage: item.image ? `url(${item.image})` : 'none',
+                                        background: item.image ? `url(${item.image}) center/cover no-repeat` : `linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)`,
                                     }}
                                 >
-                                    <span className="cart-item__image-brand">N-0</span>
+                                    {!item.image && <span className="cart-item__image-brand">N-0</span>}
                                 </div>
 
                                 <div className="cart-item__details">

@@ -1,12 +1,82 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Youtube, Mail, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Footer() {
+    const footerRef = useRef(null);
+    const newsletterRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Newsletter reveal
+            gsap.fromTo('.footer__newsletter-inner',
+                { y: 40, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: newsletterRef.current,
+                        start: 'top 75%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+
+            // Footer grid columns stagger
+            const cols = footerRef.current?.querySelectorAll('.footer__brand, .footer__links-group');
+            if (cols) {
+                gsap.fromTo(cols,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: footerRef.current,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            }
+
+            // Watermark text
+            gsap.fromTo('.footer__watermark',
+                { x: -100, opacity: 0 },
+                {
+                    x: 0, opacity: 0.03, duration: 2, ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: footerRef.current,
+                        start: 'top 70%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+
+            // Social icons stagger
+            gsap.fromTo('.footer__social-link',
+                { scale: 0, opacity: 0 },
+                {
+                    scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(2)',
+                    scrollTrigger: {
+                        trigger: footerRef.current,
+                        start: 'top 75%',
+                        toggleActions: 'play none none none',
+                    },
+                    delay: 0.3,
+                }
+            );
+        });
+
+        return () => ctx.revert();
+    }, []);
+
     return (
         <footer className="footer">
             {/* Newsletter */}
-            <div className="footer__newsletter section">
+            <div className="footer__newsletter section" ref={newsletterRef}>
                 <div className="container">
                     <div className="footer__newsletter-inner">
                         <div className="footer__newsletter-text">
@@ -31,8 +101,11 @@ export default function Footer() {
             </div>
 
             {/* Main Footer */}
-            <div className="footer__main">
+            <div className="footer__main" ref={footerRef}>
                 <div className="container">
+                    {/* Watermark */}
+                    <div className="footer__watermark">NINE-0</div>
+
                     <div className="footer__grid">
                         {/* Brand */}
                         <div className="footer__brand">

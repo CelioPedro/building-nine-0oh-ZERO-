@@ -1,8 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import WireframeGlobe from '../components/WireframeGlobe';
+
 import './About.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const values = [
     {
@@ -36,9 +41,140 @@ const timeline = [
     { year: '2026', text: 'Nova coleção. Expansão internacional em andamento' },
 ];
 
+const stats = [
+    { target: 50, suffix: 'K+', label: 'Peças Vendidas' },
+    { target: 15, suffix: 'K+', label: 'Clientes Ativos' },
+    { target: 12, suffix: '', label: 'Coleções' },
+    { target: 30, suffix: '+', label: 'Colaborações' },
+];
+
 export default function About() {
+    const valuesRef = useRef(null);
+    const timelineRef = useRef(null);
+    const statsRef = useRef(null);
+    const ctaRef = useRef(null);
+    const timelineLineRef = useRef(null);
+
     useEffect(() => {
-        window.scrollTo(0, 0);
+        const ctx = gsap.context(() => {
+            // Hero entrance
+            gsap.fromTo('.about__label',
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.2 }
+            );
+            gsap.fromTo('.about__title',
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.4 }
+            );
+            gsap.fromTo('.about__intro',
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.6 }
+            );
+
+            // Values cards — 3D perspective stagger
+            const valueCards = valuesRef.current?.querySelectorAll('.about__value-card');
+            if (valueCards) {
+                gsap.fromTo(valueCards,
+                    { y: 60, opacity: 0, rotateY: -15, scale: 0.95 },
+                    {
+                        y: 0, opacity: 1, rotateY: 0, scale: 1,
+                        duration: 1, stagger: 0.15, ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: valuesRef.current,
+                            start: 'top 65%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            }
+
+            // Section titles
+            gsap.utils.toArray('.about__section-title').forEach((title) => {
+                gsap.fromTo(title,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: title,
+                            start: 'top 75%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            });
+
+            // Timeline — drawing effect on connecting line
+            if (timelineLineRef.current) {
+                gsap.fromTo(timelineLineRef.current,
+                    { scaleY: 0 },
+                    {
+                        scaleY: 1, duration: 1.5, ease: 'power2.inOut',
+                        transformOrigin: 'top center',
+                        scrollTrigger: {
+                            trigger: timelineRef.current,
+                            start: 'top 60%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            }
+
+            // Timeline items stagger
+            const timelineItems = timelineRef.current?.querySelectorAll('.about__timeline-item');
+            if (timelineItems) {
+                gsap.fromTo(timelineItems,
+                    { x: -40, opacity: 0 },
+                    {
+                        x: 0, opacity: 1,
+                        duration: 0.8, stagger: 0.2, ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: timelineRef.current,
+                            start: 'top 55%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            }
+
+            // Stats — animated number counting
+            const statNumbers = statsRef.current?.querySelectorAll('.about__stat-number');
+            if (statNumbers) {
+                statNumbers.forEach((el, i) => {
+                    const target = stats[i].target;
+                    const suffix = stats[i].suffix;
+                    const counter = { val: 0 };
+
+                    gsap.to(counter, {
+                        val: target,
+                        duration: 2,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: statsRef.current,
+                            start: 'top 70%',
+                            toggleActions: 'play none none none',
+                        },
+                        onUpdate: () => {
+                            el.textContent = Math.floor(counter.val) + suffix;
+                        },
+                    });
+                });
+            }
+
+            // CTA reveal
+            gsap.fromTo('.about__cta-inner',
+                { y: 40, opacity: 0, scale: 0.97 },
+                {
+                    y: 0, opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: ctaRef.current,
+                        start: 'top 70%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+        });
+
+        return () => ctx.revert();
     }, []);
 
     return (
@@ -61,10 +197,11 @@ export default function About() {
                 <div className="about__hero-globe">
                     <WireframeGlobe size={500} />
                 </div>
+
             </section>
 
             {/* Values */}
-            <section className="about__values section">
+            <section className="about__values section" ref={valuesRef}>
                 <div className="container">
                     <h2 className="about__section-title">Nossos Valores</h2>
                     <div className="about__values-grid">
@@ -80,10 +217,11 @@ export default function About() {
             </section>
 
             {/* Timeline */}
-            <section className="about__timeline section">
+            <section className="about__timeline section" ref={timelineRef}>
                 <div className="container">
                     <h2 className="about__section-title">Nossa Jornada</h2>
                     <div className="about__timeline-list">
+                        <div className="about__timeline-line" ref={timelineLineRef} />
                         {timeline.map((item) => (
                             <div key={item.year} className="about__timeline-item">
                                 <span className="about__timeline-year">{item.year}</span>
@@ -96,17 +234,12 @@ export default function About() {
             </section>
 
             {/* Stats */}
-            <section className="about__stats section">
+            <section className="about__stats section" ref={statsRef}>
                 <div className="container">
                     <div className="about__stats-grid">
-                        {[
-                            { number: '50K+', label: 'Peças Vendidas' },
-                            { number: '15K+', label: 'Clientes Ativos' },
-                            { number: '12', label: 'Coleções' },
-                            { number: '30+', label: 'Colaborações' },
-                        ].map((stat) => (
+                        {stats.map((stat) => (
                             <div key={stat.label} className="about__stat">
-                                <span className="about__stat-number">{stat.number}</span>
+                                <span className="about__stat-number">0</span>
                                 <span className="about__stat-label">{stat.label}</span>
                             </div>
                         ))}
@@ -115,7 +248,7 @@ export default function About() {
             </section>
 
             {/* CTA */}
-            <section className="about__cta section">
+            <section className="about__cta section" ref={ctaRef}>
                 <div className="container">
                     <div className="about__cta-inner">
                         <h2 className="about__cta-title">

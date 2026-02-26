@@ -2,25 +2,14 @@ import { useEffect } from 'react';
 import './Lookbook.css';
 
 const lookbookItems = [
-    { id: 1, title: 'Urban Shadows', season: 'FW26', span: 'tall' },
-    { id: 2, title: 'Concrete Dreams', season: 'FW26', span: 'wide' },
-    { id: 3, title: 'Night Protocol', season: 'SS26', span: 'normal' },
-    { id: 4, title: 'Void Sequence', season: 'SS26', span: 'normal' },
-    { id: 5, title: 'Neon District', season: 'FW26', span: 'wide' },
-    { id: 6, title: 'Ghost Layer', season: 'SS26', span: 'tall' },
-    { id: 7, title: 'Phantom Code', season: 'FW26', span: 'normal' },
-    { id: 8, title: 'Eclipse Dawn', season: 'SS26', span: 'normal' },
-];
-
-const gradients = [
-    'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-    'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
-    'linear-gradient(135deg, #141e30 0%, #243b55 100%)',
-    'linear-gradient(135deg, #1e1e2f 0%, #3d3d5c 100%)',
-    'linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 50%, #2d1b69 100%)',
-    'linear-gradient(135deg, #1a1a1a 0%, #2d1f4e 100%)',
-    'linear-gradient(135deg, #111111 0%, #1e1e3f 100%)',
-    'linear-gradient(135deg, #0a0a0a 0%, #1a0933 50%, #0f3460 100%)',
+    { id: 1, title: 'Urban Shadows', season: 'FW26', span: 'tall', image: '/camisetas/Void.jpg' },
+    { id: 2, title: 'Concrete Dreams', season: 'FW26', span: 'wide', image: '/lookbook/2xko.jpg' },
+    { id: 3, title: 'Night Protocol', season: 'FW26', span: 'normal', image: '/lookbook/gorro.jpg' },
+    { id: 4, title: 'Void Sequence', season: 'FW26', span: 'normal', image: '/Jaquetas/1993.jpg' },
+    { id: 5, title: 'Neon District', season: 'FW26', span: 'wide', image: '/lookbook/baaag.jpg' },
+    { id: 6, title: 'Ghost Layer', season: 'FW26', span: 'tall', image: '/camisetas/Blood.jpg' },
+    { id: 7, title: 'Phantom Code', season: 'FW26', span: 'normal', image: '/Hoodies/Grape.jpg' },
+    { id: 8, title: 'Eclipse Dawn', season: 'FW26', span: 'normal', image: '/Jaquetas/ImBroke.jpg' },
 ];
 
 export default function Lookbook() {
@@ -54,10 +43,13 @@ export default function Lookbook() {
                             >
                                 <div
                                     className="lookbook__image"
-                                    style={{ background: gradients[i % gradients.length] }}
+                                    style={{
+                                        backgroundImage: `url(${item.image})`,
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center'
+                                    }}
                                 >
                                     <div className="lookbook__image-content">
-                                        <span className="lookbook__image-brand">N-0</span>
                                     </div>
 
                                     <div className="lookbook__item-overlay">
