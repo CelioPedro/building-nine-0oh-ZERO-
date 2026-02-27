@@ -9,7 +9,7 @@ export const products = [
     colors: ["Preto", "Roxo", "Cinza"],
     images: ["/Hoodies/Grthen.jpg"],
     badge: "NEW",
-    featured: true,
+    featured: false,
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const products = [
     sizes: ["P", "M", "G", "GG", "XG"],
     colors: ["Preto", "Branco"],
     images: ["/camisetas/Void.jpg"],
-    badge: null,
+    badge: "NEW",
     featured: true,
   },
   {
@@ -33,7 +33,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/calças/Creaming.jpg"],
     badge: "BESTSELLER",
-    featured: true,
+    featured: false,
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ export const products = [
     colors: ["Preto", "Off-White"],
     images: ["/Hoodies/Ninety.jpg"],
     badge: null,
-    featured: true,
+    featured: false,
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/calças/Damn.jpg"],
     badge: null,
-    featured: false,
+    featured: true,
   },
   {
     id: 8,
@@ -93,7 +93,7 @@ export const products = [
     colors: ["Preto", "Cinza Mescla", "Roxo Escuro"],
     images: ["/Hoodies/Grape.jpg"],
     badge: null,
-    featured: true,
+    featured: false,
   },
   {
     id: 9,
@@ -129,7 +129,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/Jaquetas/1993.jpg"],
     badge: "EXCLUSIVE",
-    featured: true,
+    featured: false,
   },
   {
     id: 12,
@@ -177,7 +177,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/camisetas/Unique.jpg"],
     badge: null,
-    featured: true,
+    featured: false,
   },
   {
     id: 16,
@@ -213,7 +213,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/camisetas/Smoke.jpg"],
     badge: null,
-    featured: true,
+    featured: false,
   },
   {
     id: 19,
@@ -249,7 +249,7 @@ export const products = [
     colors: ["Preto"],
     images: ["/camisetas/Gr.jpg"],
     badge: null,
-    featured: true,
+    featured: false,
   },
   {
     id: 22,
@@ -308,8 +308,8 @@ export const products = [
     sizes: ["P", "M", "G", "GG"],
     colors: ["Preto", "Brown"],
     images: ["/Hoodies/Sync.jpg"],
-    badge: null,
-    featured: false,
+    badge: "BESTSELLER",
+    featured: true,
   },
   {
     id: 27,
@@ -512,8 +512,8 @@ export const products = [
     sizes: ["P", "M", "G", "GG"],
     colors: ["Preto"],
     images: ["/Jaquetas/ImBroke.jpg"],
-    badge: null,
-    featured: false,
+    badge: "Exclusive",
+    featured: true,
   },
   {
     id: 44,

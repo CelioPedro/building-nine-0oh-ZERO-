@@ -9,7 +9,7 @@ const slides = [
         id: 1,
         badge: 'Nova Coleção 2026',
         titleLine1: 'FW26',
-        titleLine2: 'COLLECTION',
+        titleLine2: 'COLLECT',
         subtitle: 'Moda urbana independente. Cada peça conta uma história. Feito para quem vive a cultura de rua.',
         cta: { label: 'Explorar Coleção', to: '/shop' },
         ctaSecondary: { label: 'Lookbook', to: '/lookbook' },
@@ -29,7 +29,6 @@ const slides = [
         ctaSecondary: { label: 'Sobre Nós', to: '/about' },
         accent: '#E040FB',
         images: [
-            '/Slide/slide3.jpg',
             '/Slide/slide4.jpg',
         ],
     },

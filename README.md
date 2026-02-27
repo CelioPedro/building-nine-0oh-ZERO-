@@ -1,4 +1,4 @@
-# NINE-0 🏙️
+# NINE-0
 
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
@@ -7,18 +7,18 @@
 
 Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em streetwear brasileiro autêntico. Construída com React e Vite, oferecendo uma experiência de compra fluida com animações suaves e design responsivo.
 
-## 📋 Sumário
+## Sumário
 
-- [🚀 Demonstração](#-demonstração)
-- [✨ Funcionalidades](#-funcionalidades)
-- [🛠️ Tecnologias](#️-tecnologias)
-- [📦 Instalação](#-instalação)
-- [🏃‍♂️ Como Usar](#️-como-usar)
-- [📁 Estrutura do Projeto](#-estrutura-do-projeto)
-- [🤝 Contribuição](#-contribuição)
-- [📄 Licença](#-licença)
+- [ Demonstração](#-demonstração)
+- [ Funcionalidades](#-funcionalidades)
+- [ Tecnologias](#️-tecnologias)
+- [ Instalação](#-instalação)
+- [ Como Usar](#️-como-usar)
+- [ Estrutura do Projeto](#-estrutura-do-projeto)
+- [ Contribuição](#-contribuição)
+- [ Licença](#-licença)
 
-## 🚀 Demonstração
+## Demonstração
 
 ### Página Inicial
 ![Página Inicial](screenshots/home.png)
@@ -31,18 +31,18 @@ Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em stree
 
 > **Nota:** Adicione as imagens de screenshot na pasta `screenshots/` para visualizar as demonstrações.
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
-- 🛒 **Carrinho de Compras** - Adicione, remova e gerencie itens no carrinho
-- 🔍 **Busca e Filtros** - Encontre produtos por categoria, nome ou preço
-- 📱 **Design Responsivo** - Experiência otimizada para desktop e mobile
-- 🎨 **Animações Suaves** - Animações GSAP para interações fluidas
-- 🖼️ **Galeria de Produtos** - Visualização detalhada com múltiplas imagens
-- 📖 **Lookbook** - Apresentação visual da coleção
-- ℹ️ **Sobre a Marca** - História e valores da NINE-0
-- 📞 **Contato** - Formulário de contato integrado
+-  **Carrinho de Compras** - Adicione, remova e gerencie itens no carrinho
+-  **Busca e Filtros** - Encontre produtos por categoria, nome ou preço
+-  **Design Responsivo** - Experiência otimizada para desktop e mobile
+-  **Animações Suaves** - Animações GSAP para interações fluidas
+-  **Galeria de Produtos** - Visualização detalhada com múltiplas imagens
+-  **Lookbook** - Apresentação visual da coleção
+-  **Sobre a Marca** - História e valores da NINE-0
+-  **Contato** - Formulário de contato integrado
 
-## 🛠️ Tecnologias
+##  Tecnologias
 
 ### Frontend
 - **React 19** - Biblioteca JavaScript para interfaces
@@ -56,7 +56,7 @@ Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em stree
 - **ESLint** - Linting e formatação de código
 - **Vite Plugin React** - Integração React com Vite
 
-## 📦 Instalação
+##  Instalação
 
 ### Pré-requisitos
 - Node.js 18+
@@ -85,7 +85,7 @@ Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em stree
    http://localhost:5173
    ```
 
-## 🏃‍♂️ Como Usar
+## Como Usar
 
 ### Desenvolvimento
 ```bash
@@ -146,7 +146,7 @@ nine-0/
 └── README.md
 ```
 
-## 🤝 Contribuição
+## Contribuição
 
 Contribuições são bem-vindas! Siga estes passos:
 
@@ -167,4 +167,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-**NINE-0** - Streetwear brasileiro autêntico. Feito para quem vive a cultura urbana. 🏙️
+**NINE-0** - Streetwear brasileiro autêntico. Feito para quem vive a cultura urbana.

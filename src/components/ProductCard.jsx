@@ -12,13 +12,7 @@ const categoryGradients = {
     'acessórios': 'linear-gradient(135deg, #111 0%, #1e1e3f 50%, #0a0a1a 100%)',
 };
 
-const categoryShapes = {
-    hoodies: '◈',
-    camisetas: '△',
-    'calças': '▽',
-    jaquetas: '⬡',
-    'acessórios': '○',
-};
+const categoryShapes = {};
 
 export default function ProductCard({ product }) {
     const { id, name, price, category, badge } = product;
