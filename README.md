@@ -1,5 +1,7 @@
 # NINE-0
 
+<img src="public/logo.png" alt="Logo NINE-0" width="200"/>
+
 [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat&logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js)](https://nodejs.org/)
@@ -21,15 +23,13 @@ Uma plataforma de e-commerce moderna para a marca NINE-0, especializada em stree
 ## Demonstração
 
 ### Página Inicial
-![Página Inicial](screenshots/home.png)
+![Página Inicial](public/home.png)
 
 ### Loja
-![Página da Loja](screenshots/shop.png)
+![Página da Loja](public/shop.png)
 
 ### Detalhes do Produto
-![Detalhes do Produto](screenshots/product-detail.png)
-
-> **Nota:** Adicione as imagens de screenshot na pasta `screenshots/` para visualizar as demonstrações.
+![Detalhes do Produto](public/detail.png)
 
 ##  Funcionalidades
 
